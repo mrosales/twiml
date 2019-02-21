@@ -84,7 +84,7 @@ func (b *builder) Break(p PauseStrength) Builder {
 }
 
 func (b *builder) BreakFor(d time.Duration) Builder {
-	return b.add(&Break{Duration: Duration(d)})
+	return b.add(&Break{Time: Duration(d)})
 }
 
 func (b *builder) Audio(source *url.URL) Builder {
