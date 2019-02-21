@@ -2,6 +2,7 @@ package ssml
 
 import (
 	"encoding/xml"
+	"fmt"
 	"net/url"
 	"time"
 
@@ -9,11 +10,11 @@ import (
 )
 
 type Builder interface {
-	Text(string) Builder
+	Text(format string, args ...interface{}) Builder
 	Space() Builder
 	Newline() Builder
-	Paragraph(string) Builder
-	Sentence(string) Builder
+	Paragraph(format string, args ...interface{}) Builder
+	Sentence(format string, args ...interface{}) Builder
 	Break(PauseStrength) Builder
 	BreakFor(time.Duration) Builder
 	Audio(*url.URL) Builder
@@ -60,8 +61,8 @@ func (b *builder) add(p Phrase) Builder {
 	return b
 }
 
-func (b *builder) Text(s string) Builder {
-	return b.add(Text(s))
+func (b *builder) Text(format string, args ...interface{}) Builder {
+	return b.add(Text(fmt.Sprintf(format, args...)))
 }
 func (b *builder) Space() Builder {
 	return b.add(Text(" "))
@@ -70,12 +71,12 @@ func (b *builder) Newline() Builder {
 	return b.add(Text("\n"))
 }
 
-func (b *builder) Paragraph(s string) Builder {
-	return b.add(&Paragraph{Child: Build().Text(s)})
+func (b *builder) Paragraph(format string, args ...interface{}) Builder {
+	return b.add(&Paragraph{Child: Build().Text(format, args...)})
 }
 
-func (b *builder) Sentence(s string) Builder {
-	return b.add(&Sentence{Child: Build().Text(s)})
+func (b *builder) Sentence(format string, args ...interface{}) Builder {
+	return b.add(&Sentence{Child: Build().Text(format, args...)})
 }
 
 func (b *builder) Break(p PauseStrength) Builder {
