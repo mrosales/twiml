@@ -3,6 +3,8 @@ package twiml
 import (
 	"encoding/xml"
 	"fmt"
+
+	"github.com/mrosales/twiml/ssml"
 )
 
 // Client TwiML
@@ -423,6 +425,29 @@ func (s *Say) Validate() error {
 // Type returns the XML name of the verb
 func (s *Say) Type() string {
 	return "Say"
+}
+
+type SaySSML struct {
+	XMLName  xml.Name     `xml:"Say"`
+	Voice    string       `xml:"voice,attr,omitempty"`
+	Language string       `xml:"language,attr,omitempty"`
+	Loop     int          `xml:"loop,attr,omitempty"`
+	Builder  ssml.Builder `xml:",innerxml"`
+}
+
+func (s *SaySSML) Type() string {
+	return "Say"
+}
+
+func (s *SaySSML) Validate() error {
+	// TODO [MHR 2019-02-20] We will want some additional validation here
+	ok := Validate(
+		NotNil(s.Builder),
+	)
+	if !ok {
+		return fmt.Errorf("%s markup failed validation", s.Type())
+	}
+	return nil
 }
 
 // Sip TwiML

@@ -37,6 +37,19 @@ const (
 	ChineseTaiwanese   = "zh-TW"
 )
 
+// AWS Polly Voices
+const (
+	// en-US
+	PollyIvy      = "Polly.Ivy"
+	PollyJoanna   = "Polly.Joanna"
+	PollyJoey     = "Polly.Joey"
+	PollyJustin   = "Polly.Justin"
+	PollyKendra   = "Polly.Kendra"
+	PollyKimberly = "Polly.Kimberly"
+	PollyMatthew  = "Polly.Matthew"
+	PollySalli    = "Polly.Salli"
+)
+
 // Call status
 const (
 	Queued     = "queued"

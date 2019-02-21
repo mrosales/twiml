@@ -132,3 +132,7 @@ func AllowedCallbackEvent(events string) bool {
 	var validEvents = regexp.MustCompile(`^(initiated\s?|ringing\s?|answered\s?|completed\s?)+$`)
 	return validEvents.MatchString(events)
 }
+
+func NotNil(object interface{}) bool {
+	return object != nil
+}

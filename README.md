@@ -104,3 +104,9 @@ The example above shows the general flow of constructing a response.  Start with
 ## More examples
 
 For a more detailed example of constructing a small TwiML response server, see my [Twilio Voice project](https://github.com/BTBurke/twilio-voice) which is a Google-voice clone that forwards calls to your number and handles transcribing voicemails.
+
+## SSML Inspiration
+
+The SSM implementation was based off of:
+
+https://github.com/rickcrawford/go-ssml
